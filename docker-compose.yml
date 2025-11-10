@@ -1,7 +1,7 @@
 version: '3'
 services:
   namenode:
-    image: adbgonzalez/hadoop:test
+    image: adbgonzalez/hadoop:test-lean
     container_name: namenode
     hostname: namenode
     ports:
@@ -17,7 +17,7 @@ services:
 
 
   datanode:
-    image: adbgonzalez/hadoop:test
+    image: adbgonzalez/hadoop:test-lean
     container_name: datanode
     hostname: datanode
     networks:
@@ -27,7 +27,7 @@ services:
     command: hdfs datanode
 
   resourcemanager:
-    image: adbgonzalez/hadoop:test
+    image: adbgonzalez/hadoop:test-lean
     container_name: resourcemanager
     hostname: resourcemanager
     ports:
@@ -37,7 +37,7 @@ services:
     command: yarn resourcemanager
 
   nodemanager:
-    image: adbgonzalez/hadoop:test
+    image: adbgonzalez/hadoop:test-lean
     container_name: nodemanager
     hostname: nodemanager
     networks:
