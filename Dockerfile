@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV HADOOP_VERSION=3.4.2
+ENV HADOOP_VERSION=3.3.6
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ENV HADOOP_HOME=/usr/local/hadoop
 ENV HADOOP_INSTALL=$HADOOP_HOME
@@ -27,7 +27,7 @@ WORKDIR /home/hadoop
 
 # Descargar, extraer e borrar o tarball na MESMA capa
 RUN set -eux; \
-    url="https://downloads.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}-lean.tar.gz"; \
+    url="https://downloads.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz"; \
     wget -O /tmp/hadoop.tar.gz "$url"; \
     tar -xzf /tmp/hadoop.tar.gz -C /usr/local/; \
     mv /usr/local/hadoop-${HADOOP_VERSION} ${HADOOP_HOME}; \
