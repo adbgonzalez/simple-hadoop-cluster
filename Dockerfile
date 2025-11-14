@@ -34,6 +34,21 @@ RUN set -eux; \
     rm -f /tmp/hadoop.tar.gz; \
     chown -R hadoop:hadoop ${HADOOP_HOME}
 
+# Incluímos os JARS para MinIO/S3
+# Versión de AWS SDK
+ARG AWS_SDK_VERSION=1.12.262
+RUN set -eux; \
+    mkdir -p "$HADOOP_HOME/share/hadoop/tools/lib"; \
+    BASE_URL="https://repo1.maven.org/maven2"; \
+    # hadoop-aws (mesma versión ca Hadoop)
+    wget -O "$HADOOP_HOME/share/hadoop/tools/lib/hadoop-aws-${HADOOP_VERSION}.jar" \
+      "$BASE_URL/org/apache/hadoop/hadoop-aws/${HADOOP_VERSION}/hadoop-aws-${HADOOP_VERSION}.jar"; \
+    # aws-java-sdk-bundle (versión fixada arriba no ARG)
+    wget -O "$HADOOP_HOME/share/hadoop/tools/lib/aws-java-sdk-bundle-${AWS_SDK_VERSION}.jar" \
+      "$BASE_URL/com/amazonaws/aws-java-sdk-bundle/${AWS_SDK_VERSION}/aws-java-sdk-bundle-${AWS_SDK_VERSION}.jar"; \
+    # axustar propietario
+    chown -R hadoop:hadoop "$HADOOP_HOME/share/hadoop/tools/lib"
+
 # Dirs de datos
 RUN install -d -o hadoop -g hadoop /home/hadoop/namenode /home/hadoop/datanode
 
